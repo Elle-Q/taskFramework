@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qxy.db.mapper.TaskInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.qxy.db.model.TaskInfo" >
+    <id column="TASK_NAME" property="taskName" jdbcType="VARCHAR" />
+    <id column="INFO_ID" property="infoId" jdbcType="VARCHAR" />
+    <result column="SITE" property="site" jdbcType="VARCHAR" />
+    <result column="STAGE" property="stage" jdbcType="VARCHAR" />
+    <result column="BANCH" property="banch" jdbcType="BIGINT" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="START_DATE" property="startDate" jdbcType="VARCHAR" />
+    <result column="END_DATE" property="endDate" jdbcType="VARCHAR" />
+    <result column="SUCC_NUM" property="succNum" jdbcType="BIGINT" />
+    <result column="ERRO_NUM" property="erroNum" jdbcType="BIGINT" />
+    <result column="INFO_A" property="infoA" jdbcType="VARCHAR" />
+    <result column="INFO_B" property="infoB" jdbcType="VARCHAR" />
+    <result column="INFO_C" property="infoC" jdbcType="VARCHAR" />
+    <result column="INFO_D" property="infoD" jdbcType="VARCHAR" />
+    <result column="INFO_E" property="infoE" jdbcType="VARCHAR" />
+    <result column="INFO_INT_1" property="infoInt1" jdbcType="BIGINT" />
+    <result column="INFO_INT_2" property="infoInt2" jdbcType="BIGINT" />
+    <result column="LOG_INFO" property="logInfo" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="EXEC_TIME" property="execTime" jdbcType="TIMESTAMP" />
+    <result column="INFO_F" property="infoF" jdbcType="VARCHAR" />
+    <result column="INFO_G" property="infoG" jdbcType="VARCHAR" />
+    <result column="PRIORITY" property="priority" jdbcType="INTEGER" />
+    <result column="APP_SYMBOL" property="appSymbol" jdbcType="VARCHAR" />
+    <result column="FILE_CNT" property="fileCnt" jdbcType="INTEGER" />
+    <result column="DIR_CNT" property="dirCnt" jdbcType="INTEGER" />
+    <result column="FILE_SIZE" property="fileSize" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TASK_NAME, INFO_ID, SITE, STAGE, BANCH, STATUS, START_DATE, END_DATE, SUCC_NUM, ERRO_NUM, 
+    INFO_A, INFO_B, INFO_C, INFO_D, INFO_E, INFO_INT_1, INFO_INT_2, LOG_INFO, CREATE_TIME, 
+    EXEC_TIME, INFO_F, INFO_G, PRIORITY, APP_SYMBOL, FILE_CNT, DIR_CNT, FILE_SIZE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qxy.db.model.TaskInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from task_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.qxy.db.model.TaskInfoKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from task_info
+    where TASK_NAME = #{taskName,jdbcType=VARCHAR}
+      and INFO_ID = #{infoId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.qxy.db.model.TaskInfoKey" >
+    delete from task_info
+    where TASK_NAME = #{taskName,jdbcType=VARCHAR}
+      and INFO_ID = #{infoId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qxy.db.model.TaskInfoExample" >
+    delete from task_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qxy.db.model.TaskInfo" >
+    insert into task_info (TASK_NAME, INFO_ID, SITE, 
+      STAGE, BANCH, STATUS, 
+      START_DATE, END_DATE, SUCC_NUM, 
+      ERRO_NUM, INFO_A, INFO_B, 
+      INFO_C, INFO_D, INFO_E, 
+      INFO_INT_1, INFO_INT_2, LOG_INFO, 
+      CREATE_TIME, EXEC_TIME, INFO_F, 
+      INFO_G, PRIORITY, APP_SYMBOL, 
+      FILE_CNT, DIR_CNT, FILE_SIZE
+      )
+    values (#{taskName,jdbcType=VARCHAR}, #{infoId,jdbcType=VARCHAR}, #{site,jdbcType=VARCHAR}, 
+      #{stage,jdbcType=VARCHAR}, #{banch,jdbcType=BIGINT}, #{status,jdbcType=VARCHAR}, 
+      #{startDate,jdbcType=VARCHAR}, #{endDate,jdbcType=VARCHAR}, #{succNum,jdbcType=BIGINT}, 
+      #{erroNum,jdbcType=BIGINT}, #{infoA,jdbcType=VARCHAR}, #{infoB,jdbcType=VARCHAR}, 
+      #{infoC,jdbcType=VARCHAR}, #{infoD,jdbcType=VARCHAR}, #{infoE,jdbcType=VARCHAR}, 
+      #{infoInt1,jdbcType=BIGINT}, #{infoInt2,jdbcType=BIGINT}, #{logInfo,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{execTime,jdbcType=TIMESTAMP}, #{infoF,jdbcType=VARCHAR}, 
+      #{infoG,jdbcType=VARCHAR}, #{priority,jdbcType=INTEGER}, #{appSymbol,jdbcType=VARCHAR}, 
+      #{fileCnt,jdbcType=INTEGER}, #{dirCnt,jdbcType=INTEGER}, #{fileSize,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qxy.db.model.TaskInfo" >
+    insert into task_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="taskName != null" >
+        TASK_NAME,
+      </if>
+      <if test="infoId != null" >
+        INFO_ID,
+      </if>
+      <if test="site != null" >
+        SITE,
+      </if>
+      <if test="stage != null" >
+        STAGE,
+      </if>
+      <if test="banch != null" >
+        BANCH,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="startDate != null" >
+        START_DATE,
+      </if>
+      <if test="endDate != null" >
+        END_DATE,
+      </if>
+      <if test="succNum != null" >
+        SUCC_NUM,
+      </if>
+      <if test="erroNum != null" >
+        ERRO_NUM,
+      </if>
+      <if test="infoA != null" >
+        INFO_A,
+      </if>
+      <if test="infoB != null" >
+        INFO_B,
+      </if>
+      <if test="infoC != null" >
+        INFO_C,
+      </if>
+      <if test="infoD != null" >
+        INFO_D,
+      </if>
+      <if test="infoE != null" >
+        INFO_E,
+      </if>
+      <if test="infoInt1 != null" >
+        INFO_INT_1,
+      </if>
+      <if test="infoInt2 != null" >
+        INFO_INT_2,
+      </if>
+      <if test="logInfo != null" >
+        LOG_INFO,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="execTime != null" >
+        EXEC_TIME,
+      </if>
+      <if test="infoF != null" >
+        INFO_F,
+      </if>
+      <if test="infoG != null" >
+        INFO_G,
+      </if>
+      <if test="priority != null" >
+        PRIORITY,
+      </if>
+      <if test="appSymbol != null" >
+        APP_SYMBOL,
+      </if>
+      <if test="fileCnt != null" >
+        FILE_CNT,
+      </if>
+      <if test="dirCnt != null" >
+        DIR_CNT,
+      </if>
+      <if test="fileSize != null" >
+        FILE_SIZE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="infoId != null" >
+        #{infoId,jdbcType=VARCHAR},
+      </if>
+      <if test="site != null" >
+        #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="stage != null" >
+        #{stage,jdbcType=VARCHAR},
+      </if>
+      <if test="banch != null" >
+        #{banch,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        #{startDate,jdbcType=VARCHAR},
+      </if>
+      <if test="endDate != null" >
+        #{endDate,jdbcType=VARCHAR},
+      </if>
+      <if test="succNum != null" >
+        #{succNum,jdbcType=BIGINT},
+      </if>
+      <if test="erroNum != null" >
+        #{erroNum,jdbcType=BIGINT},
+      </if>
+      <if test="infoA != null" >
+        #{infoA,jdbcType=VARCHAR},
+      </if>
+      <if test="infoB != null" >
+        #{infoB,jdbcType=VARCHAR},
+      </if>
+      <if test="infoC != null" >
+        #{infoC,jdbcType=VARCHAR},
+      </if>
+      <if test="infoD != null" >
+        #{infoD,jdbcType=VARCHAR},
+      </if>
+      <if test="infoE != null" >
+        #{infoE,jdbcType=VARCHAR},
+      </if>
+      <if test="infoInt1 != null" >
+        #{infoInt1,jdbcType=BIGINT},
+      </if>
+      <if test="infoInt2 != null" >
+        #{infoInt2,jdbcType=BIGINT},
+      </if>
+      <if test="logInfo != null" >
+        #{logInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="execTime != null" >
+        #{execTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="infoF != null" >
+        #{infoF,jdbcType=VARCHAR},
+      </if>
+      <if test="infoG != null" >
+        #{infoG,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="appSymbol != null" >
+        #{appSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="fileCnt != null" >
+        #{fileCnt,jdbcType=INTEGER},
+      </if>
+      <if test="dirCnt != null" >
+        #{dirCnt,jdbcType=INTEGER},
+      </if>
+      <if test="fileSize != null" >
+        #{fileSize,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qxy.db.model.TaskInfoExample" resultType="java.lang.Integer" >
+    select count(*) from task_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update task_info
+    <set >
+      <if test="record.taskName != null" >
+        TASK_NAME = #{record.taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoId != null" >
+        INFO_ID = #{record.infoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.site != null" >
+        SITE = #{record.site,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stage != null" >
+        STAGE = #{record.stage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.banch != null" >
+        BANCH = #{record.banch,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startDate != null" >
+        START_DATE = #{record.startDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endDate != null" >
+        END_DATE = #{record.endDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.succNum != null" >
+        SUCC_NUM = #{record.succNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.erroNum != null" >
+        ERRO_NUM = #{record.erroNum,jdbcType=BIGINT},
+      </if>
+      <if test="record.infoA != null" >
+        INFO_A = #{record.infoA,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoB != null" >
+        INFO_B = #{record.infoB,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoC != null" >
+        INFO_C = #{record.infoC,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoD != null" >
+        INFO_D = #{record.infoD,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoE != null" >
+        INFO_E = #{record.infoE,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoInt1 != null" >
+        INFO_INT_1 = #{record.infoInt1,jdbcType=BIGINT},
+      </if>
+      <if test="record.infoInt2 != null" >
+        INFO_INT_2 = #{record.infoInt2,jdbcType=BIGINT},
+      </if>
+      <if test="record.logInfo != null" >
+        LOG_INFO = #{record.logInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.execTime != null" >
+        EXEC_TIME = #{record.execTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.infoF != null" >
+        INFO_F = #{record.infoF,jdbcType=VARCHAR},
+      </if>
+      <if test="record.infoG != null" >
+        INFO_G = #{record.infoG,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priority != null" >
+        PRIORITY = #{record.priority,jdbcType=INTEGER},
+      </if>
+      <if test="record.appSymbol != null" >
+        APP_SYMBOL = #{record.appSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileCnt != null" >
+        FILE_CNT = #{record.fileCnt,jdbcType=INTEGER},
+      </if>
+      <if test="record.dirCnt != null" >
+        DIR_CNT = #{record.dirCnt,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileSize != null" >
+        FILE_SIZE = #{record.fileSize,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update task_info
+    set TASK_NAME = #{record.taskName,jdbcType=VARCHAR},
+      INFO_ID = #{record.infoId,jdbcType=VARCHAR},
+      SITE = #{record.site,jdbcType=VARCHAR},
+      STAGE = #{record.stage,jdbcType=VARCHAR},
+      BANCH = #{record.banch,jdbcType=BIGINT},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      START_DATE = #{record.startDate,jdbcType=VARCHAR},
+      END_DATE = #{record.endDate,jdbcType=VARCHAR},
+      SUCC_NUM = #{record.succNum,jdbcType=BIGINT},
+      ERRO_NUM = #{record.erroNum,jdbcType=BIGINT},
+      INFO_A = #{record.infoA,jdbcType=VARCHAR},
+      INFO_B = #{record.infoB,jdbcType=VARCHAR},
+      INFO_C = #{record.infoC,jdbcType=VARCHAR},
+      INFO_D = #{record.infoD,jdbcType=VARCHAR},
+      INFO_E = #{record.infoE,jdbcType=VARCHAR},
+      INFO_INT_1 = #{record.infoInt1,jdbcType=BIGINT},
+      INFO_INT_2 = #{record.infoInt2,jdbcType=BIGINT},
+      LOG_INFO = #{record.logInfo,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      EXEC_TIME = #{record.execTime,jdbcType=TIMESTAMP},
+      INFO_F = #{record.infoF,jdbcType=VARCHAR},
+      INFO_G = #{record.infoG,jdbcType=VARCHAR},
+      PRIORITY = #{record.priority,jdbcType=INTEGER},
+      APP_SYMBOL = #{record.appSymbol,jdbcType=VARCHAR},
+      FILE_CNT = #{record.fileCnt,jdbcType=INTEGER},
+      DIR_CNT = #{record.dirCnt,jdbcType=INTEGER},
+      FILE_SIZE = #{record.fileSize,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qxy.db.model.TaskInfo" >
+    update task_info
+    <set >
+      <if test="site != null" >
+        SITE = #{site,jdbcType=VARCHAR},
+      </if>
+      <if test="stage != null" >
+        STAGE = #{stage,jdbcType=VARCHAR},
+      </if>
+      <if test="banch != null" >
+        BANCH = #{banch,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null" >
+        START_DATE = #{startDate,jdbcType=VARCHAR},
+      </if>
+      <if test="endDate != null" >
+        END_DATE = #{endDate,jdbcType=VARCHAR},
+      </if>
+      <if test="succNum != null" >
+        SUCC_NUM = #{succNum,jdbcType=BIGINT},
+      </if>
+      <if test="erroNum != null" >
+        ERRO_NUM = #{erroNum,jdbcType=BIGINT},
+      </if>
+      <if test="infoA != null" >
+        INFO_A = #{infoA,jdbcType=VARCHAR},
+      </if>
+      <if test="infoB != null" >
+        INFO_B = #{infoB,jdbcType=VARCHAR},
+      </if>
+      <if test="infoC != null" >
+        INFO_C = #{infoC,jdbcType=VARCHAR},
+      </if>
+      <if test="infoD != null" >
+        INFO_D = #{infoD,jdbcType=VARCHAR},
+      </if>
+      <if test="infoE != null" >
+        INFO_E = #{infoE,jdbcType=VARCHAR},
+      </if>
+      <if test="infoInt1 != null" >
+        INFO_INT_1 = #{infoInt1,jdbcType=BIGINT},
+      </if>
+      <if test="infoInt2 != null" >
+        INFO_INT_2 = #{infoInt2,jdbcType=BIGINT},
+      </if>
+      <if test="logInfo != null" >
+        LOG_INFO = #{logInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="execTime != null" >
+        EXEC_TIME = #{execTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="infoF != null" >
+        INFO_F = #{infoF,jdbcType=VARCHAR},
+      </if>
+      <if test="infoG != null" >
+        INFO_G = #{infoG,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        PRIORITY = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="appSymbol != null" >
+        APP_SYMBOL = #{appSymbol,jdbcType=VARCHAR},
+      </if>
+      <if test="fileCnt != null" >
+        FILE_CNT = #{fileCnt,jdbcType=INTEGER},
+      </if>
+      <if test="dirCnt != null" >
+        DIR_CNT = #{dirCnt,jdbcType=INTEGER},
+      </if>
+      <if test="fileSize != null" >
+        FILE_SIZE = #{fileSize,jdbcType=BIGINT},
+      </if>
+    </set>
+    where TASK_NAME = #{taskName,jdbcType=VARCHAR}
+      and INFO_ID = #{infoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qxy.db.model.TaskInfo" >
+    update task_info
+    set SITE = #{site,jdbcType=VARCHAR},
+      STAGE = #{stage,jdbcType=VARCHAR},
+      BANCH = #{banch,jdbcType=BIGINT},
+      STATUS = #{status,jdbcType=VARCHAR},
+      START_DATE = #{startDate,jdbcType=VARCHAR},
+      END_DATE = #{endDate,jdbcType=VARCHAR},
+      SUCC_NUM = #{succNum,jdbcType=BIGINT},
+      ERRO_NUM = #{erroNum,jdbcType=BIGINT},
+      INFO_A = #{infoA,jdbcType=VARCHAR},
+      INFO_B = #{infoB,jdbcType=VARCHAR},
+      INFO_C = #{infoC,jdbcType=VARCHAR},
+      INFO_D = #{infoD,jdbcType=VARCHAR},
+      INFO_E = #{infoE,jdbcType=VARCHAR},
+      INFO_INT_1 = #{infoInt1,jdbcType=BIGINT},
+      INFO_INT_2 = #{infoInt2,jdbcType=BIGINT},
+      LOG_INFO = #{logInfo,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      EXEC_TIME = #{execTime,jdbcType=TIMESTAMP},
+      INFO_F = #{infoF,jdbcType=VARCHAR},
+      INFO_G = #{infoG,jdbcType=VARCHAR},
+      PRIORITY = #{priority,jdbcType=INTEGER},
+      APP_SYMBOL = #{appSymbol,jdbcType=VARCHAR},
+      FILE_CNT = #{fileCnt,jdbcType=INTEGER},
+      DIR_CNT = #{dirCnt,jdbcType=INTEGER},
+      FILE_SIZE = #{fileSize,jdbcType=BIGINT}
+    where TASK_NAME = #{taskName,jdbcType=VARCHAR}
+      and INFO_ID = #{infoId,jdbcType=VARCHAR}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.qxy.db.model.TaskInfoExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from task_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

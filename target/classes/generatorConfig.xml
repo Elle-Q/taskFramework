@@ -31,7 +31,9 @@
         </javaClientGenerator>
         <!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
         <!--<table tableName="student" domainObjectName="StudentDb" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
-        <table tableName="pics" domainObjectName="PicDb"/>
+        <!--<table tableName="pics" domainObjectName="PicDb"/>-->
+        <!--<table tableName="task_info"/>-->
+        <table tableName="error_log"/>
         <!--<table tableName="course_info" domainObjectName="CourseInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
         <table tableName="course_user_info" domainObjectName="CourseUserInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
     </context>
